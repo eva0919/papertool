@@ -64,11 +64,12 @@ def cal_probability(list,node)
 
 end
 
-def cal_line(node,jointNode)
+def cal_line(node,jNode)
 	nodeSize = node.size
-	(0..nodeSize).each do |ind|
-		(ind+1..nodeSize).each do |i|
-			isIndependent(node[ind],node[i],jointNode)
+	
+	(0..nodeSize-1).each do |ind|
+		(ind+1..nodeSize-1).each do |i|
+			isIndependent(node[ind],node[i],jNode)
 		end
 	end
 end
@@ -77,6 +78,20 @@ def show_probabilit(node1,node2)
 	node1.Probability.each do |key,value|
 		node2.Probability.each do |key2,value2|
 			puts "#{key}-#{key2} : #{value*value2}"
+		end
+	end
+end
+
+def isIndependent(node1,node2,jNode)
+	id1 = node1.NodeID-1
+	id2 = node2.NodeID-1
+	jointProbability = jNode["#{id1}#{id2}"]
+	node1.Probability.each do |key,value|
+		node2.Probability.each do |key2,value2|
+			tag = "#{key}#{key2}"
+			if  (value * value2 - jointProbability[tag]).abs > 0.05
+				puts "#{id1} -> #{id2}"
+			end
 		end
 	end
 end
@@ -96,6 +111,7 @@ DeBugMan.testForNumber(nodeTotalNum,4,"Node number is correct!") if @bugMode
 end
 
 jointNode = cal_probability(randomList,nodeList)
+
 DeBugMan.testForNumber(jointNode.size,6,"Joint Node num is correct!") if @bugMode
 
 cal_line(nodeList,jointNode)

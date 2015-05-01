@@ -11,4 +11,10 @@ class DeBugMan
 			puts "\nDeBugMan Say :Error!\n"
 		end
 	end
+
+	def self.putValue(data)
+		puts "\n>>>>>>>>>>>>>>>>>Messange>>>>>>>>>>>>>>>>>"
+		puts "#{data}"
+		puts ">>>>>>>>>>>>>>>>>Messange>>>>>>>>>>>>>>>>>\n"
+	end
 end
