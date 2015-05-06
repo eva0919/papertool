@@ -74,7 +74,17 @@ def get_random_variable
 		end
 	end
 
-	return arr
+	resultArray = []
+	arr.each do |value|
+		tempHash = Hash.new
+		tempHash[:A1] = value[0]
+		tempHash[:A2] = value[1]
+		tempHash[:A3] = value[2]
+		tempHash[:A4] = value[3]
+		resultArray << tempHash 
+	end
+
+	return resultArray
 end
 
 

@@ -3,6 +3,7 @@ require './node.rb'
 require './DeBugMan.rb'
 require 'optparse'
 
+
 @bugMode = false
 
 options = {}
