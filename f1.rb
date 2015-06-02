@@ -4,28 +4,28 @@ require 'date'
 
 
 	companyList = ["apple","samsung","nokia","htc","motorola"]
-	fOutput = File.open("output_index_#{targetIndex}",'w')
-	# fOutput.write( "@relation active_action_1\n" )
-	# fOutput.write( "@attribute t1_a1 numeric\n" )
-	# fOutput.write( "@attribute t1_a2 numeric\n")
-	# fOutput.write( "@attribute t1_a3 numeric\n")
-	# fOutput.write( "@attribute t1_a4 numeric\n")
-	# fOutput.write( "@attribute t1_a5 numeric\n")
-	# fOutput.write( "@attribute t1_a6 numeric\n")
-	# fOutput.write( "@attribute t2_a1 numeric\n")
-	# fOutput.write( "@attribute t2_a2 numeric\n")
-	# fOutput.write( "@attribute t2_a3 numeric\n")
-	# fOutput.write( "@attribute t2_a4 numeric\n")
-	# fOutput.write( "@attribute t2_a5 numeric\n")
-	# fOutput.write( "@attribute t2_a6 numeric\n")
-	# fOutput.write( "@attribute t3_a1 numeric\n")
-	# fOutput.write( "@attribute t3_a2 numeric\n")
-	# fOutput.write( "@attribute t3_a3 numeric\n")
-	# fOutput.write( "@attribute t3_a4 numeric\n")
-	# fOutput.write( "@attribute t3_a5 numeric\n")
-	# fOutput.write( "@attribute t3_a6 numeric\n")
-	# fOutput.write( "@attribute t4_a numeric\n")
-	# fOutput.write( "@data\n\n")
+	fOutput = File.open("RowData_weka_logic_#{targetIndex}.arff",'w')
+	fOutput.write( "@relation active_action_1\n" )
+	fOutput.write( "@attribute t1_a1 numeric\n" )
+	fOutput.write( "@attribute t1_a2 numeric\n")
+	fOutput.write( "@attribute t1_a3 numeric\n")
+	fOutput.write( "@attribute t1_a4 numeric\n")
+	fOutput.write( "@attribute t1_a5 numeric\n")
+	fOutput.write( "@attribute t1_a6 numeric\n")
+	fOutput.write( "@attribute t2_a1 numeric\n")
+	fOutput.write( "@attribute t2_a2 numeric\n")
+	fOutput.write( "@attribute t2_a3 numeric\n")
+	fOutput.write( "@attribute t2_a4 numeric\n")
+	fOutput.write( "@attribute t2_a5 numeric\n")
+	fOutput.write( "@attribute t2_a6 numeric\n")
+	fOutput.write( "@attribute t3_a1 numeric\n")
+	fOutput.write( "@attribute t3_a2 numeric\n")
+	fOutput.write( "@attribute t3_a3 numeric\n")
+	fOutput.write( "@attribute t3_a4 numeric\n")
+	fOutput.write( "@attribute t3_a5 numeric\n")
+	fOutput.write( "@attribute t3_a6 numeric\n")
+	fOutput.write( "@attribute t4_a {0,1}\n")
+	fOutput.write( "@data\n\n")
 
 	companyList.each do |companyName|
 		hash = {}
@@ -105,6 +105,7 @@ require 'date'
 						# end
 						tempIndex = targetIndex
 						tempValue = hash[timeZone[ind]][tempIndex]
+						tempValue = 1 if tempValue.to_i > 0
 						fOutput.write( "#{temp}#{tempValue}\n" ) 
 						
 					end
