@@ -1,10 +1,15 @@
 # coding: utf-8
+# Generate weka file to run logic regression 
+# model : only using self data
 require 'date'
+maxYear = 2014
+filenameAppend = "All_action_Round2_"
+output_filenameAppend ="RowData_weka_logic_round2_" 
 (0..5).each do |targetIndex|
 
 
 	companyList = ["apple","samsung","nokia","htc","motorola"]
-	fOutput = File.open("RowData_weka_logic_#{targetIndex}.arff",'w')
+	fOutput = File.open("#{output_filenameAppend}#{targetIndex}.arff",'w')
 	fOutput.write( "@relation active_action_1\n" )
 	fOutput.write( "@attribute t1_a1 numeric\n" )
 	fOutput.write( "@attribute t1_a2 numeric\n")
@@ -31,13 +36,13 @@ require 'date'
 		hash = {}
 		isEnd = false
 		zeroArray = Array.new(6) { |i| i = 0 }
-		(2012..2013).each do |year|
+		(2012..maxYear).each do |year|
 			(1..12).each do |season|
 				hash["#{year}-#{season}"] = Array.new(zeroArray)
 			end
 		end
 
-		File.open("#{companyName}_all_event").each do |line|
+		File.open("#{filenameAppend}#{companyName}").each do |line|
 			token = line.split(' ')
 			d = Date.parse( token[6] )
 			season = d.mon
@@ -65,7 +70,7 @@ require 'date'
 
 
 
-		(2012..2013).each do |year|
+		(2012..maxYear).each do |year|
 			(1..12).each do |season|
 				y = year
 				t = season-1
@@ -74,7 +79,7 @@ require 'date'
 					t += 1
 					if t > 12
 						y += 1
-						if y > 2013
+						if y > maxYear
 							break
 						end
 						t = 1
@@ -82,7 +87,7 @@ require 'date'
 					timeZone[ind] = "#{y}-#{t}"
 				end
 				
-				if y > 2013
+				if y > maxYear
 					isEnd = true
 					break
 				end

@@ -17,4 +17,10 @@ class DeBugMan
 		puts "#{data}"
 		puts ">>>>>>>>>>>>>>>>>Messange>>>>>>>>>>>>>>>>>\n"
 	end
+
+	def loading_bar(nowPoint,endPoint)
+		p = ( (nowPoint*1.0) / endPoint) * 100
+		print "\r"
+		print "#{p}%"
+	end
 end

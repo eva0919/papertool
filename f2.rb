@@ -1,28 +1,31 @@
 # coding: utf-8
+# Generate weka file to run logic regression 
+# model : using self data and all competitor
 require 'date'
-
-
-	companyList = ["apple","samsung","nokia","htc","motorola"]
-	
+maxYear = 2014
+filenameAppend = "All_action_Round2_"
+output_filenameAppend ="RowData_weka_competitve_logic_round2_" 
+	# allCompanyList = ["apple","samsung","nokia","htc","motorola","huawei","zte","lg","lenovo","sony","xiaomi"]
+	allCompanyList = ["apple","samsung","nokia","htc","motorola","huawei"]
 
 	companyHash = {}
 	totalActionHash = {}
-	(2012..2013).each do |year|
+	(2012..maxYear).each do |year|
 		(1..12).each do |season|
 			totalActionHash["#{year}-#{season}"] = Array.new(6) { |i| i = 0 }
 		end
 	end
-	companyList.each do |companyName|
+	allCompanyList.each do |companyName|
 		hash = {}
 		isEnd = false
 		zeroArray = Array.new(6) { |i| i = 0 }
-		(2012..2013).each do |year|
+		(2012..maxYear).each do |year|
 			(1..12).each do |season|
 				hash["#{year}-#{season}"] = Array.new(zeroArray)
 			end
 		end
 
-		File.open("#{companyName}_all_event").each do |line|
+		File.open("#{filenameAppend}#{companyName}").each do |line|
 			token = line.split(' ')
 			d = Date.parse( token[6] )
 			season = d.mon
@@ -58,54 +61,53 @@ require 'date'
 
 (0..5).each do |targetIndex|
 
-	fOutput = File.open("RowData_weka_competitve_logic_#{targetIndex}",'w')
+	fOutput = File.open("#{output_filenameAppend}#{targetIndex}.arff",'w')
 
-	# fOutput.write( "@relation active_action_1\n")
-	# fOutput.write( "@attribute t1_a1 numeric\n")
-	# fOutput.write( "@attribute ct1_a1 numeric\n")
-	# fOutput.write( "@attribute t1_a2 numeric\n")
-	# fOutput.write( "@attribute ct1_a2 numeric\n")
-	# fOutput.write( "@attribute t1_a3 numeric\n")
-	# fOutput.write( "@attribute ct1_a3 numeric\n")
-	# fOutput.write( "@attribute t1_a4 numeric\n")
-	# fOutput.write( "@attribute ct1_a4 numeric\n")
-	# fOutput.write( "@attribute t1_a5 numeric\n")
-	# fOutput.write( "@attribute ct1_a5 numeric\n")
-	# fOutput.write( "@attribute t1_a6 numeric\n")
-	# fOutput.write( "@attribute ct1_a6 numeric\n")
-	# fOutput.write( "@attribute t2_a1 numeric\n")
-	# fOutput.write( "@attribute ct2_a1 numeric\n")
-	# fOutput.write( "@attribute t2_a2 numeric\n")
-	# fOutput.write( "@attribute ct2_a2 numeric\n")
-	# fOutput.write( "@attribute t2_a3 numeric\n")
-	# fOutput.write( "@attribute ct2_a3 numeric\n")
-	# fOutput.write( "@attribute t2_a4 numeric\n")
-	# fOutput.write( "@attribute ct2_a4 numeric\n")
-	# fOutput.write( "@attribute t2_a5 numeric\n")
-	# fOutput.write( "@attribute ct2_a5 numeric\n")
-	# fOutput.write( "@attribute t2_a6 numeric\n")
-	# fOutput.write( "@attribute ct2_a6 numeric\n")
-	# fOutput.write( "@attribute t3_a1 numeric\n")
-	# fOutput.write( "@attribute ct3_a1 numeric\n")
-	# fOutput.write( "@attribute t3_a2 numeric\n")
-	# fOutput.write( "@attribute ct3_a2 numeric\n")
-	# fOutput.write( "@attribute t3_a3 numeric\n")
-	# fOutput.write( "@attribute ct3_a3 numeric\n")
-	# fOutput.write( "@attribute t3_a4 numeric\n")
-	# fOutput.write( "@attribute ct3_a4 numeric\n")
-	# fOutput.write( "@attribute t3_a5 numeric\n")
-	# fOutput.write( "@attribute ct3_a5 numeric\n")
-	# fOutput.write( "@attribute t3_a6 numeric\n")
-	# fOutput.write( "@attribute ct3_a6 numeric\n")
-	# fOutput.write( "@attribute t4_a {0,1}\n")
-	# fOutput.write( "@data\n\n")
-
-
+	fOutput.write( "@relation active_action_1\n")
+	fOutput.write( "@attribute t1_a1 numeric\n")
+	fOutput.write( "@attribute ct1_a1 numeric\n")
+	fOutput.write( "@attribute t1_a2 numeric\n")
+	fOutput.write( "@attribute ct1_a2 numeric\n")
+	fOutput.write( "@attribute t1_a3 numeric\n")
+	fOutput.write( "@attribute ct1_a3 numeric\n")
+	fOutput.write( "@attribute t1_a4 numeric\n")
+	fOutput.write( "@attribute ct1_a4 numeric\n")
+	fOutput.write( "@attribute t1_a5 numeric\n")
+	fOutput.write( "@attribute ct1_a5 numeric\n")
+	fOutput.write( "@attribute t1_a6 numeric\n")
+	fOutput.write( "@attribute ct1_a6 numeric\n")
+	fOutput.write( "@attribute t2_a1 numeric\n")
+	fOutput.write( "@attribute ct2_a1 numeric\n")
+	fOutput.write( "@attribute t2_a2 numeric\n")
+	fOutput.write( "@attribute ct2_a2 numeric\n")
+	fOutput.write( "@attribute t2_a3 numeric\n")
+	fOutput.write( "@attribute ct2_a3 numeric\n")
+	fOutput.write( "@attribute t2_a4 numeric\n")
+	fOutput.write( "@attribute ct2_a4 numeric\n")
+	fOutput.write( "@attribute t2_a5 numeric\n")
+	fOutput.write( "@attribute ct2_a5 numeric\n")
+	fOutput.write( "@attribute t2_a6 numeric\n")
+	fOutput.write( "@attribute ct2_a6 numeric\n")
+	fOutput.write( "@attribute t3_a1 numeric\n")
+	fOutput.write( "@attribute ct3_a1 numeric\n")
+	fOutput.write( "@attribute t3_a2 numeric\n")
+	fOutput.write( "@attribute ct3_a2 numeric\n")
+	fOutput.write( "@attribute t3_a3 numeric\n")
+	fOutput.write( "@attribute ct3_a3 numeric\n")
+	fOutput.write( "@attribute t3_a4 numeric\n")
+	fOutput.write( "@attribute ct3_a4 numeric\n")
+	fOutput.write( "@attribute t3_a5 numeric\n")
+	fOutput.write( "@attribute ct3_a5 numeric\n")
+	fOutput.write( "@attribute t3_a6 numeric\n")
+	fOutput.write( "@attribute ct3_a6 numeric\n")
+	fOutput.write( "@attribute t4_a {0,1}\n")
+	fOutput.write( "@data\n\n")
+	companyList = ["apple","samsung","nokia","htc","motorola"]
 	companyList.each do |companyName|
 		# competitiveCompanyList = companyList.select{|i| i!=companyName}
 		# p competitiveCompanyList
 		isEnd = false
-		(2012..2013).each do |year|
+		(2012..maxYear).each do |year|
 			(1..12).each do |season|
 				y = year
 				t = season-1
@@ -114,7 +116,7 @@ require 'date'
 					t += 1
 					if t > 12
 						y += 1
-						if y > 2013
+						if y > maxYear
 							break
 						end
 						t = 1
@@ -122,7 +124,7 @@ require 'date'
 					timeZone[ind] = "#{y}-#{t}"
 				end
 				
-				if y > 2013
+				if y > maxYear
 					isEnd = true
 					break
 				end
